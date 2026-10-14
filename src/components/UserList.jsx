@@ -2,7 +2,7 @@ import Spinner from "./Spinnex";
 
 export default function UserList(){
      return(
-        <>
+       
         <div className="table-wrapper">
         
         
@@ -106,9 +106,8 @@ export default function UserList(){
           </tbody>
         </table>
       </div>
-          {/* <!-- New user button  --> */}      
-         <button className="btn-add btn">Add new user</button>
+          
 
-      </>
+
      );
 }
