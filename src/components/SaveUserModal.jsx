@@ -1,4 +1,32 @@
-export default function SaveUserModal({onClose}){
+export default function SaveUserModal({onClose,onSubmit}){
+
+    const onSubmitClickHandler=(e)=>{
+      //prevent submit
+      e.preventDefault();
+      
+      //get form values
+      const formData = new FormData(e.target);
+
+      //construct object from form values
+      const employee = {
+          firstName: formData.get('firstName'),
+          secondName: formData.get('lastName'),
+          email: formData.get('email'),
+          phoneNumber: formData.get('phoneNumber'),
+          imageUrl: formData.get('imageUrl'),
+          addres:{
+            country: formData.get('country'),
+            city: formData.get('city'),
+            street: formData.get('street'),
+            streetNumber: formData.get('streetNumber')
+          }  
+      }
+
+      //Call the onsubmit prop wth the constructed object
+      onSubmit(employee)
+      
+    }
+
      return(
             <div className="overlay"> 
        <div className="backdrop" onClick={onClose}></div>
@@ -15,7 +43,7 @@ export default function SaveUserModal({onClose}){
               </svg>
             </button>
           </header>
-          <htmlForm>
+          <form onSubmit={onSubmitClickHandler} >
             <div className="htmlForm-row">
               <div className="htmlForm-group">
                 <label htmlFor="firstName">First name</label>
@@ -92,12 +120,12 @@ export default function SaveUserModal({onClose}){
               </div>
             </div>
             <div id="htmlForm-actions">
-              <button id="action-save" className="btn" type="submit">Save</button>
+              <button id="action-save" className="btn" type="submit" >Save</button>
               <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                 Cancel
               </button>
             </div>
-          </htmlForm>
+          </form>
         </div>
       </div>
     </div>

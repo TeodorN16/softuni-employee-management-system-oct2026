@@ -3,7 +3,7 @@ import { fromIsoDate } from "../utills/dateTimeUtills";
 export default function UserListItem({
     id,
     firstName,
-    secondName,
+    lastName,
     email,
     phoneNumber,
     createdAt,
@@ -18,7 +18,7 @@ export default function UserListItem({
                   alt="Peter's profile" className="image" />
               </td>
               <td>{firstName}</td>
-              <td>{secondName}</td>
+              <td>{lastName}</td>
               <td>{email}</td>
               <td>{phoneNumber}</td>
               <td>{fromIsoDate(createdAt)}</td>
