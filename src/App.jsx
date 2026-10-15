@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './styles.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -7,8 +7,20 @@ import UserSearch from './components/UserSearch'
 import Pagination from './components/Pagination'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [users,setUsers] = useState([]);
+  
+    
 
+    useEffect(()=>{
+      fetch('https://ptinhmqtsdyypgonctpt.supabase.co/rest/v1/users',{
+        headers:{
+          apiKey: 'sb_publishable_C-7XR-oZXrWmvBJKnsr4oQ_6LiUIkZM'
+        }
+      })
+        .then(res => res.json())
+        .then(data=>setUsers(data))
+        .catch(error=>console.error(error))
+    },[])
   return (
     <>
 
@@ -21,7 +33,7 @@ function App() {
           <UserSearch/>
 
         {/* <!-- Table component --> */}
-          <UserList/>
+          <UserList users={users}/>
 
           {/* <!-- New user button  --> */}      
          <button className="btn-add btn">Add new user</button>
