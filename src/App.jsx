@@ -27,6 +27,10 @@ function App() {
     const addUserClickHandler=()=>{
       setShowUserModal(true)
     }
+
+    const addUserCloseHandler=()=>{
+      setShowUserModal(false)
+    }
   return (
     <>
 
@@ -43,7 +47,7 @@ function App() {
 
           {/* <!-- New user button  --> */}      
          <button className="btn-add btn" onClick={addUserClickHandler}>Add new user</button>
-        {showSaveUserModal && <SaveUserModal/>}
+        {showSaveUserModal && <SaveUserModal onClose={addUserCloseHandler}/>}
       
           <Pagination/>
         </section>
