@@ -17,15 +17,13 @@ function App() {
     
 
     useEffect(()=>{
-      fetch('https://ptinhmqtsdyypgonctpt.supabase.co/rest/v1/users',{
-        headers:{
-          'apiKey': apiKey
-        }
-      })
-        .then(res => res.json())
+      fetchUsers()
         .then(data=>setUsers(data))
         .catch(error=>console.error(error))
     },[])
+
+    
+    
 
     const addUserClickHandler=()=>{
       setShowUserModal(true)
@@ -35,21 +33,27 @@ function App() {
       setShowUserModal(false)
     }
 
-    const submitUserHandler=(user)=>{
-        console.log(user);
+    const submitUserHandler=async (user)=>{
+        
+    try{
+      await fetch(baseURL,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey':apiKey
+        },
+        body:JSON.stringify(user)
 
-        //send user to REST API
-        fetch(baseURL,{
-          method:'POST',
-          headers:{
-          'Content-Type': 'application/json',
-          'apiKey':apiKey,
-          },
-          body:JSON.stringify(user)
         })
-          .then(() =>console.log(data))
-          .catch(err=>console.log(err))
-          .finally(()=>setShowUserModal(false))
+        const updatedUsers = await fetchUsers();
+        setUsers(updatedUsers)
+      }catch(error){
+        alert('Error adding user: '+error)
+      }finally{
+        setShowUserModal(false)
+      }
+    
+        
           
         
     }
@@ -93,5 +97,14 @@ function App() {
   </>
   )
 }
+async function fetchUsers(){
+      const response = await fetch('https://ptinhmqtsdyypgonctpt.supabase.co/rest/v1/users',{
+        headers:{
+          'apiKey': apiKey
+        }
+      })
+        const data = await response.json();
+        return data
+    }
 
 export default App
