@@ -5,9 +5,11 @@ import Footer from './components/Footer'
 import UserList from './components/UserList'
 import UserSearch from './components/UserSearch'
 import Pagination from './components/Pagination'
+import SaveUserModal from './components/SaveUserModal'
 
 function App() {
     const [users,setUsers] = useState([]);
+    const [showSaveUserModal,setShowUserModal]=useState(false)
   
     
 
@@ -21,6 +23,10 @@ function App() {
         .then(data=>setUsers(data))
         .catch(error=>console.error(error))
     },[])
+
+    const addUserClickHandler=()=>{
+      setShowUserModal(true)
+    }
   return (
     <>
 
@@ -36,8 +42,8 @@ function App() {
           <UserList users={users}/>
 
           {/* <!-- New user button  --> */}      
-         <button className="btn-add btn">Add new user</button>
-   
+         <button className="btn-add btn" onClick={addUserClickHandler}>Add new user</button>
+        {showSaveUserModal && <SaveUserModal/>}
       
           <Pagination/>
         </section>
