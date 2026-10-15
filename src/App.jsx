@@ -48,8 +48,9 @@ function App() {
           body:JSON.stringify(user)
         })
           .then(() =>console.log(data))
-          .catch(err=>console.log(err)
-          )
+          .catch(err=>console.log(err))
+          .finally(()=>setShowUserModal(false))
+          
         
     }
   return (
