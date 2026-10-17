@@ -2,6 +2,7 @@ import { useState } from "react";
 import Spinner from "./Spinnex";
 import UserDetails from "./UserDetails";
 import UserListItem from "./UserListItem";
+import UserDeleteModal from "./UserDeleteModal";
 
 export default function UserList({
   users,
@@ -19,6 +20,8 @@ export default function UserList({
       setShowUserDetails(false)
       setSelectedUserId(null);
     }
+
+    const[showUserDelete,setShowUserDelete] = useState(false);
      return(
        
         <div className="table-wrapper">
@@ -91,7 +94,8 @@ export default function UserList({
           </tbody>
         </table>
 
-       {showUserDetails &&  <UserDetails userId = {selectedUserId} onClose={hideUserDetailsHandler}/>}
+       {showUserDetails &&  <UserDetails userId = {selectedUserId} onClose={hideUserDetailsHandler}/>}`
+       {showUserDelete &&  <UserDeleteModal userId = {selectedUserId} onClose={}/>}`
       </div>
           
 
