@@ -8,10 +8,16 @@ export default function UserList({
 }){
 
   const [selectedUserId,setSelectedUserId]=useState(null);
-    const[showUserDetails,setShowUserDetails]=useState(false)
+  const[showUserDetails,setShowUserDetails]=useState(false)
+
     const showUserDetailsHandler=(userId)=>{
       setSelectedUserId(userId);
         setShowUserDetails(true);
+    }
+
+    const hideUserDetailsHandler=()=>{
+      setShowUserDetails(false)
+      setSelectedUserId(null);
     }
      return(
        
@@ -85,7 +91,7 @@ export default function UserList({
           </tbody>
         </table>
 
-       {showUserDetails &&  <UserDetails userId = {selectedUserId}/>}
+       {showUserDetails &&  <UserDetails userId = {selectedUserId} onClose={hideUserDetailsHandler}/>}
       </div>
           
 
